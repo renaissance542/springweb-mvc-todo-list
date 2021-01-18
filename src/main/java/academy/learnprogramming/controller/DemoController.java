@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Slf4j
@@ -38,10 +39,12 @@ public class DemoController {
         return "goodbye";
     }
     
-    // http://localhost:8080/todo-list/welcome
+    // http://localhost:8080/todo-list/welcome   <-- this is before the @RequestParam was used
+    // http://localhost:8080/todo-list/welcome?user=Phil&age=35  <-- this provides @RequestParam String user
     @GetMapping("welcome")  // viewResolver builds prefix(/WEB-INF/view/) + view(welcome) + suffix (.jsp)
-    public String welcome(Model model){
-        model.addAttribute("helloMessage", demoService.getHelloMessage("Phil"));
+    public String welcome(@RequestParam String user, @RequestParam int age, Model model){
+        model.addAttribute("helloMessage", demoService.getHelloMessage(user));
+        model.addAttribute("age", age);
         log.info("model = {}", model);
         return "welcome";
     }
