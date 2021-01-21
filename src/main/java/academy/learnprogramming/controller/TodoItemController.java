@@ -1,9 +1,11 @@
 package academy.learnprogramming.controller;
 
 import academy.learnprogramming.model.TodoData;
+import academy.learnprogramming.service.TodoItemService;
 import academy.learnprogramming.util.Mappings;
 import academy.learnprogramming.util.ViewNames;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,11 +16,16 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 public class TodoItemController {
     
     // == fields ==
-        // TodoData service field
+    private final TodoItemService todoItemService;
     
     
     // == constructors ==
-        // instantiates  the TodoData service
+    
+    @Autowired
+    public TodoItemController(TodoItemService todoItemService) {
+        this.todoItemService = todoItemService;
+    }
+    
     
     // == handler methods ==
     
@@ -32,9 +39,11 @@ public class TodoItemController {
     
     // == model attributes ==
     
-    @ModelAttribute("todoList")
+    @ModelAttribute("todoData")
     public TodoData todoData (){
-        return new TodoData();
+        TodoData list = todoItemService.getData();
+        log.info("TodoData size = {}", list.getTodoItems().size());
+        return list;
     }
         // map model to .jsp files and add attributes to the model
         // call services to manipulate data to be added to the model
