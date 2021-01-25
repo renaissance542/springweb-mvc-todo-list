@@ -1,7 +1,9 @@
 package academy.learnprogramming.controller;
 
 import academy.learnprogramming.model.TodoData;
+import academy.learnprogramming.model.TodoItem;
 import academy.learnprogramming.service.TodoItemService;
+import academy.learnprogramming.util.AttributeNames;
 import academy.learnprogramming.util.Mappings;
 import academy.learnprogramming.util.ViewNames;
 import lombok.extern.slf4j.Slf4j;
@@ -10,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 
 @Slf4j
 @Controller
@@ -26,17 +29,6 @@ public class TodoItemController {
         this.todoItemService = todoItemService;
     }
     
-    
-    // == handler methods ==
-    
-    // http://localhost:8080/todo-list/items
-    @GetMapping(Mappings.ITEMS)
-    public String items (Model model){
-        
-        log.info("model = {}", model);
-        return ViewNames.ITEMS_LIST;
-    }
-    
     // == model attributes ==
     
     @ModelAttribute("todoData")
@@ -48,4 +40,35 @@ public class TodoItemController {
         // map model to .jsp files and add attributes to the model
         // call services to manipulate data to be added to the model
         // the .jsp page will simply call the data that has already been modified
+    
+    // == handler methods ==
+    
+    // http://localhost:8080/todo-list/items
+    @GetMapping(Mappings.ITEMS)
+    public String items (Model model){
+        
+        log.info("model = {}", model);
+        return ViewNames.ITEMS_LIST;
+    }
+    
+    @PostMapping(Mappings.ADD_ITEM)
+    public String processItem(@ModelAttribute(AttributeNames.TODO_ITEM) TodoItem todoItem){
+    
+        return "redirect:/" + Mappings.ITEMS;
+    }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
