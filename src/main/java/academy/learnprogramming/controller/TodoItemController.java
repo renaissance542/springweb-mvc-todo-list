@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import java.time.LocalDate;
+
 @Slf4j
 @Controller
 public class TodoItemController {
@@ -51,11 +53,21 @@ public class TodoItemController {
         return ViewNames.ITEMS_LIST;
     }
     
+    @GetMapping(Mappings.ADD_ITEM)
+    public String addEditItem(Model model){
+        model.addAttribute(AttributeNames.TODO_ITEM, new TodoItem("","", LocalDate.now()));
+        return ViewNames.ADD_ITEM;
+    }
+    
     @PostMapping(Mappings.ADD_ITEM)
     public String processItem(@ModelAttribute(AttributeNames.TODO_ITEM) TodoItem todoItem){
-    
+        log.info("todoItem from form = {}", todoItem);
+        todoItemService.addItem(todoItem);
         return "redirect:/" + Mappings.ITEMS;
     }
+    
+
+    
 }
 
 
