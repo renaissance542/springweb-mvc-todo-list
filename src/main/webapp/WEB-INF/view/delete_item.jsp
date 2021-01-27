@@ -4,10 +4,11 @@
 <%@ page import="academy.learnprogramming.util.AttributeNames" %>
 <html>
 <head>
-    <title>Add Item</title>
+    <title>Delete Item</title>
 </head>
 <body>
     <div align="center">
+        <h2>Press SUBMIT button to confirm deleting this item:</h2>
         <form:form method="POST" modelAttribute="${AttributeNames.TODO_ITEM}">
             <table>
                 <tr>
@@ -19,19 +20,19 @@
                 <tr>
                     <td><label>Title</label></td>
                     <td>
-                        <form:input path="title"/>
+                        <form:input path="title" disabled="true"/>
                     </td>
                 </tr>
                 <tr>
                     <td><label>Deadline</label></td>
                     <td>
-                        <form:input path="deadline"/>
+                        <form:input path="deadline" disabled="true"/>
                     </td>
                 </tr>
                 <tr>
                     <td><label>Details</label></td>
                     <td>
-                        <form:input path="details"/>
+                        <form:input path="details" disabled="true"/>
                     </td>
                 </tr>
                 <tr>
