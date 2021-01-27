@@ -45,6 +45,13 @@ public class TodoItemController {
     
     // == handler methods ==
     
+//    This mapping was unnecessary because there is no need for model
+//    attributes on this page.
+    //    @GetMapping(Mappings.HOME)
+    //    public String home(){
+    //        return ViewNames.HOME;
+    //    }
+    
     // http://localhost:8080/todo-list/items
     @GetMapping(Mappings.ITEMS)
     public String items (Model model){

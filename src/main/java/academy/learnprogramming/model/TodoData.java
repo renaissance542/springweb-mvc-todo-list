@@ -13,22 +13,22 @@ import java.util.ListIterator;
 public class TodoData {
     
     // == fields ==
-    private static int idValue = 1;  // will be auto-incremented
+    private static int idValue = 1;  // will be auto-incremented  ... should it be static?
     private final List<TodoItem> todoItems = new ArrayList<>();
     
     // == constructors ==
     public TodoData() {
         
         // add dummy data using the addTodoItem method to set the id field
-        todoItems.add(new TodoItem("first", "first details",
+        addTodoItem(new TodoItem("first", "first details",
                 LocalDate.now()));
-        todoItems.add(new TodoItem("second", "second details",
+        addTodoItem(new TodoItem("second", "second details",
                 LocalDate.now()));
-        todoItems.add(new TodoItem("third", "third details",
+        addTodoItem(new TodoItem("third", "third details",
                 LocalDate.now()));
-        todoItems.add(new TodoItem("See doctor", "Dr Smith Limerick",
+        addTodoItem(new TodoItem("See doctor", "Dr Smith Limerick",
                 LocalDate.of(2021, 2,3)));
-        todoItems.add(new TodoItem("Punch faces", "all the faces that need it",
+        addTodoItem(new TodoItem("Punch faces", "all the faces that need it",
                 LocalDate.of(2021, 03, 14)));
         log.info("Dummy Data added");
         
